@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Иван Салимов — Портфолио & CV | НИУ ВШЭ</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              cyan: '#06b6d4',
+              blue: '#3b82f6',
+              indigo: '#6366f1',
+              violet: '#8b5cf6',
+              dark: '#0a0f1d',
+              card: '#111827',
+              border: 'rgba(255, 255, 255, 0.08)'
+            }
+          },
+          animation: {
+            'blob': 'blob 7s infinite',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -40px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.95)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0a0f1d;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1f2937;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #374151;
+    }
+
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .glass-card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card-hover:hover {
+      border-color: rgba(59, 130, 246, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px -10px rgba(59, 130, 246, 0.2);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Print styling for direct CV export */
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .glass-card {
+        background: none !important;
+        border: 1px solid #e5e7eb !important;
+        box-shadow: none !important;
+      }
+      .gradient-text {
+        -webkit-text-fill-color: black !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-brand-dark text-slate-200 font-sans selection:bg-indigo-500 selection:text-white relative min-h-screen antialiased overflow-x-hidden">
+
+  <!-- Ambient Glow Background Blobs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-blue-600/15 rounded-full filter blur-[100px] animate-blob"></div>
+    <div class="absolute top-1/3 -right-40 w-96 h-96 bg-indigo-600/15 rounded-full filter blur-[100px] animate-blob" style="animation-delay: 2s;"></div>
+    <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-cyan-600/15 rounded-full filter blur-[100px] animate-blob" style="animation-delay: 4s;"></div>
+  </div>
+
+  <!-- Notification Toast (for copy events) -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="glass-card px-4 py-3 rounded-xl border border-indigo-500/40 shadow-xl flex items-center space-x-3 text-sm">
+      <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+      <span id="toast-message" class="text-white font-medium">Скопировано в буфер обмена!</span>
+    </div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-40 border-b border-white/5 bg-brand-dark/80 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="#hero" class="flex items-center space-x-2.5 font-mono text-sm tracking-wider font-bold group">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+          IS
+        </span>
+        <span class="text-slate-100 group-hover:text-white transition-colors">fgugygyftdttftf<span class="text-cyan-400">.cv</span></span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-cyan-400 transition-colors">Обо мне</a>
+        <a href="#education" class="hover:text-cyan-400 transition-colors">Образование</a>
+        <a href="#skills" class="hover:text-cyan-400 transition-colors">Навыки</a>
+        <a href="#achievements" class="hover:text-cyan-400 transition-colors">Достижения</a>
+        <a href="#contact" class="hover:text-cyan-400 transition-colors">Контакты</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="flex items-center space-x-3">
+        <button onclick="window.print()" class="no-print hidden sm:inline-flex items-center space-x-2 text-xs font-mono px-3.5 py-1.5 rounded-lg border border-slate-700 bg-slate-900/60 hover:bg-slate-800 text-slate-300 hover:text-white transition">
+          <i class="fa-solid fa-print"></i>
+          <span>Печать CV</span>
+        </button>
+        <a href="#contact" class="px-4 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-sm shadow-blue-500/25 transition">
+          Написать
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-16 space-y-24">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="min-h-[78vh] flex flex-col justify-center items-center text-center pt-8">
+      <!-- Status Badge -->
+      <div class="inline-flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/60 mb-6 text-xs sm:text-sm font-mono shadow-inner">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse-slow"></span>
+        <span class="text-slate-300">НИУ ВШЭ СПб • Прикладной анализ данных & ИИ</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-4">
+        Салимов Иван <span class="block mt-1 gradient-text">Артёмович</span>
+      </h1>
+
+      <p class="text-lg sm:text-xl text-slate-400 max-w-2xl font-light mb-8 leading-relaxed">
+        Студент бакалавриата ПАДиИИ в НИУ ВШЭ Санкт-Петербург. Специализируюсь на 
+        <span class="text-cyan-400 font-medium font-mono">C++</span>, алгоритмическом анализе и прикладных методах анализа данных.
+      </p>
+
+      <!-- Key Action Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-4 mb-12">
+        <a href="https://t.me/IVSONIX" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-medium text-sm shadow-lg shadow-indigo-500/25 transition duration-200 transform hover:-translate-y-0.5 flex items-center space-x-2">
+          <i class="fa-brands fa-telegram text-base"></i>
+          <span>Telegram: @IVSONIX</span>
+        </a>
+        <a href="https://github.com/fgugygyftdttftf" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-xl glass-card hover:bg-slate-800 text-slate-200 hover:text-white font-medium text-sm transition duration-200 border border-white/10 flex items-center space-x-2">
+          <i class="fa-brands fa-github text-lg"></i>
+          <span>GitHub (@fgugygyftdttftf)</span>
+        </a>
+        <button onclick="copyToClipboard('iasalimov@edu.hse.ru', 'Почта ВШЭ скопирована!')" class="px-4 py-3 rounded-xl glass-card hover:bg-slate-800 text-slate-300 hover:text-white text-sm transition flex items-center space-x-2" title="Скопировать почту">
+          <i class="fa-regular fa-copy"></i>
+          <span>iasalimov@edu.hse.ru</span>
+        </button>
+      </div>
+
+      <!-- Quick Metrics Strip -->
+      <div class="w-full max-w-3xl grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="glass-card p-4 rounded-xl text-center">
+          <div class="font-mono text-xl sm:text-2xl font-bold text-cyan-400">18 лет</div>
+          <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Возраст</div>
+        </div>
+        <div class="glass-card p-4 rounded-xl text-center">
+          <div class="font-mono text-xl sm:text-2xl font-bold text-indigo-400">ВШЭ СПб</div>
+          <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Университет</div>
+        </div>
+        <div class="glass-card p-4 rounded-xl text-center">
+          <div class="font-mono text-xl sm:text-2xl font-bold text-blue-400">C++ / AI</div>
+          <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Стек фокуса</div>
+        </div>
+        <div class="glass-card p-4 rounded-xl text-center">
+          <div class="font-mono text-xl sm:text-2xl font-bold text-emerald-400">1 место</div>
+          <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">РГГМУ конф.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="scroll-mt-24">
+      <div class="flex items-center space-x-3 mb-8">
+        <div class="w-2.5 h-8 bg-cyan-500 rounded-full"></div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Обо мне</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Main Bio Card -->
+        <div class="md:col-span-2 glass-card p-6 sm:p-8 rounded-2xl relative overflow-hidden">
+          <div class="absolute -right-8 -bottom-8 opacity-5 font-mono text-8xl text-white select-none pointer-events-none">
+            &lt;/&gt;
+          </div>
+          <p class="text-slate-300 leading-relaxed mb-4">
+            Привет! Меня зовут <strong class="text-white">Иван Салимов</strong>. Мне 18 лет, я живу и учусь в <strong class="text-white">Санкт-Петербурге</strong> в <strong class="text-white">НИУ ВШЭ</strong> на программе «Прикладной анализ данных и искусственный интеллект» (ПАДиИИ).
+          </p>
+          <p class="text-slate-300 leading-relaxed mb-4">
+            Мой основной технологический вектор — высокоэффективный код на <span class="text-cyan-400 font-semibold font-mono">C++</span>, глубокое понимание структуры памяти, алгоритмов и математических моделей, лежащих в основе современного анализа данных и машинного обучения.
+          </p>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Интересуюсь соревновательным программированием, архитектурой эффективных вычислений и системным проектированием. Стремлюсь применять фундаментальные академические знания для решения нетривиальных инженерных задач.
+          </p>
+
+          <div class="mt-6 pt-6 border-t border-white/5 flex flex-wrap gap-4 text-xs font-mono text-slate-400">
+            <div><i class="fa-solid fa-location-dot text-indigo-400 mr-1.5"></i> Санкт-Петербург, Россия</div>
+            <div><i class="fa-solid fa-graduation-cap text-cyan-400 mr-1.5"></i> Студент бакалавриата</div>
+            <div><i class="fa-solid fa-code-branch text-emerald-400 mr-1.5"></i> Открыт к pet-проектам & стажировкам</div>
+          </div>
+        </div>
+
+        <!-- Highlights Card -->
+        <div class="glass-card p-6 rounded-2xl flex flex-col justify-between space-y-4">
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-400 font-mono">
+            Ключевые ориентиры
+          </h3>
+
+          <div class="space-y-4">
+            <div class="flex items-start space-x-3">
+              <div class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
+                <i class="fa-solid fa-microchip"></i>
+              </div>
+              <div>
+                <h4 class="text-white text-sm font-semibold">C++ & Оптимизация</h4>
+                <p class="text-xs text-slate-400">STL, итераторы, эффективная аллокация памяти и алгоритмы.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3">
+              <div class="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5">
+                <i class="fa-solid fa-brain"></i>
+              </div>
+              <div>
+                <h4 class="text-white text-sm font-semibold">Data Science & AI</h4>
+                <p class="text-xs text-slate-400">Математический анализ, высшая алгебра и алгоритмы ML.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3">
+              <div class="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 mt-0.5">
+                <i class="fa-solid fa-trophy"></i>
+              </div>
+              <div>
+                <h4 class="text-white text-sm font-semibold">Исследования</h4>
+                <p class="text-xs text-slate-400">Опыт научной работы и побед в профильных конференциях.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <span class="inline-block text-[11px] font-mono text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/50">
+              Статус: Активное обучение в Вышке
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section id="education" class="scroll-mt-24">
+      <div class="flex items-center space-x-3 mb-8">
+        <div class="w-2.5 h-8 bg-indigo-500 rounded-full"></div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Образование</h2>
+      </div>
+
+      <div class="glass-card p-6 sm:p-8 rounded-2xl relative overflow-hidden">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/5 pb-6 mb-6">
+          <div class="flex items-center space-x-4">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-700 to-indigo-900 border border-blue-400/30 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-indigo-900/40 text-center leading-tight">
+              ВШЭ<br><span class="text-[10px] tracking-normal uppercase font-normal text-cyan-300">СПб</span>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white">НИУ ВШЭ — Санкт-Петербург</h3>
+              <p class="text-cyan-400 text-sm font-medium mt-0.5">
+                Программа: «Прикладной анализ данных и искусственный интеллект» (ПАДиИИ)
+              </p>
+            </div>
+          </div>
+          <div class="font-mono text-xs px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-slate-300 self-start md:self-center">
+            2026 — 2030 (Бакалавриат)
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+          <div class="space-y-2">
+            <h4 class="text-white font-semibold flex items-center space-x-2">
+              <i class="fa-solid fa-square-root-variable text-blue-400 text-xs"></i>
+              <span>Математическая база</span>
+            </h4>
+            <p class="text-slate-400 text-xs leading-relaxed">
+              Математический анализ, высшая алгебра, дискретная математика, теория вероятностей и математическая статистика.
+            </p>
+          </div>
+          <div class="space-y-2">
+            <h4 class="text-white font-semibold flex items-center space-x-2">
+              <i class="fa-solid fa-code text-cyan-400 text-xs"></i>
+              <span>Программирование & CS</span>
+            </h4>
+            <p class="text-slate-400 text-xs leading-relaxed">
+              Углублённый C++, структуры данных и алгоритмы, основы операционных систем, архитектура компьютеров.
+            </p>
+          </div>
+          <div class="space-y-2">
+            <h4 class="text-white font-semibold flex items-center space-x-2">
+              <i class="fa-solid fa-chart-line text-indigo-400 text-xs"></i>
+              <span>Data Science & AI</span>
+            </h4>
+            <p class="text-slate-400 text-xs leading-relaxed">
+              Методы машинного обучения, статистический анализ данных, подготовка данных и проектирование моделей машинного обучения.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="scroll-mt-24">
+      <div class="flex items-center space-x-3 mb-8">
+        <div class="w-2.5 h-8 bg-blue-500 rounded-full"></div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Технические навыки</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        
+        <!-- C++ Card -->
+        <div class="glass-card glass-card-hover p-6 rounded-2xl">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center text-lg font-mono font-bold">
+              C++
+            </div>
+            <span class="text-xs font-mono px-2 py-1 rounded bg-blue-500/20 text-blue-300">Основной стек</span>
+          </div>
+          <h3 class="text-white font-semibold mb-2">C++ (STL, C++17/20)</h3>
+          <p class="text-slate-400 text-xs leading-relaxed mb-4">
+            Написание высокопроизводительного кода, управление динамической памятью, указатели, шаблоны, STL-контейнеры и алгоритмы.
+          </p>
+          <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">STL</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Pointers & References</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">OOP</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Templates</span>
+          </div>
+        </div>
+
+        <!-- Algorithms Card -->
+        <div class="glass-card glass-card-hover p-6 rounded-2xl">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-lg">
+              <i class="fa-solid fa-diagram-project"></i>
+            </div>
+            <span class="text-xs font-mono px-2 py-1 rounded bg-cyan-500/20 text-cyan-300">CS Core</span>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Алгоритмы & Структуры данных</h3>
+          <p class="text-slate-400 text-xs leading-relaxed mb-4">
+            Оценка асимптотической сложности (Big-O), графы (DFS, BFS), деревья поиска, динамическое программирование, сортировки.
+          </p>
+          <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Graph Theory</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">DP</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Trees</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Binary Search</span>
+          </div>
+        </div>
+
+        <!-- Data Science & Python -->
+        <div class="glass-card glass-card-hover p-6 rounded-2xl">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 flex items-center justify-center text-lg">
+              <i class="fa-brands fa-python"></i>
+            </div>
+            <span class="text-xs font-mono px-2 py-1 rounded bg-indigo-500/20 text-indigo-300">Data Science</span>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Python & Анализ данных</h3>
+          <p class="text-slate-400 text-xs leading-relaxed mb-4">
+            Обработка, очистка и визуализация данных, решение олимпиадных и аналитических задач, работа с базовыми библиотеками ML.
+          </p>
+          <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Python 3</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">NumPy</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Pandas</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Matplotlib</span>
+          </div>
+        </div>
+
+        <!-- Developer Tooling -->
+        <div class="glass-card glass-card-hover p-6 rounded-2xl">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/30 text-orange-400 flex items-center justify-center text-lg">
+              <i class="fa-brands fa-git-alt"></i>
+            </div>
+            <span class="text-xs font-mono px-2 py-1 rounded bg-orange-500/20 text-orange-300">Workflow</span>
+          </div>
+          <h3 class="text-white font-semibold mb-2">Инструменты разработки & Workflow</h3>
+          <p class="text-slate-400 text-xs leading-relaxed mb-4">
+            Системы контроля версий, командная строка Linux, сборка проектов, автоматизация рабочих процессов.
+          </p>
+          <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Git / GitHub</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Linux / Bash</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">CMake</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">GCC / Clang</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS SECTION -->
+    <section id="achievements" class="scroll-mt-24">
+      <div class="flex items-center space-x-3 mb-8">
+        <div class="w-2.5 h-8 bg-amber-400 rounded-full"></div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Достижения</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Major RSHU Achievement Card -->
+        <div class="glass-card p-6 sm:p-8 rounded-2xl border-amber-500/20 relative overflow-hidden group">
+          <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+            <i class="fa-solid fa-award text-7xl text-amber-400"></i>
+          </div>
+          <div class="inline-flex items-center space-x-2 text-xs font-mono font-semibold px-2.5 py-1 rounded-full bg-amber-400/10 text-amber-400 border border-amber-400/20 mb-4">
+            <i class="fa-solid fa-trophy"></i>
+            <span>Победитель 1 степени</span>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">
+            Научно-практическая конференция РГГМУ
+          </h3>
+          <p class="text-slate-300 text-sm leading-relaxed mb-4">
+            Завоевал <strong class="text-white">1 место</strong> в секции школьного отделения конференции от Российского государственного гидрометеорологического университета (РГГМУ).
+          </p>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li class="flex items-start space-x-2">
+              <i class="fa-solid fa-circle-check text-amber-400 mt-0.5 text-[10px]"></i>
+              <span>Проведение исследовательского анализа и обработка эмпирических данных.</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <i class="fa-solid fa-circle-check text-amber-400 mt-0.5 text-[10px]"></i>
+              <span>Успешная защита результатов перед академическим жюри экспертов университета.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Academic Selection to HSE -->
+        <div class="glass-card p-6 sm:p-8 rounded-2xl border-blue-500/20 relative overflow-hidden group">
+          <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+            <i class="fa-solid fa-building-columns text-7xl text-blue-400"></i>
+          </div>
+          <div class="inline-flex items-center space-x-2 text-xs font-mono font-semibold px-2.5 py-1 rounded-full bg-blue-400/10 text-blue-400 border border-blue-400/20 mb-4">
+            <i class="fa-solid fa-star"></i>
+            <span>Высокий конкурс</span>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">
+            Поступление на ПАДиИИ в НИУ ВШЭ
+          </h3>
+          <p class="text-slate-300 text-sm leading-relaxed mb-4">
+            Успешное прохождение конкурсного отбора на одно из самых востребованных и технологически передовых направлений подготовки специалистов в сфере искусственного интеллекта.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li class="flex items-start space-x-2">
+              <i class="fa-solid fa-circle-check text-blue-400 mt-0.5 text-[10px]"></i>
+              <span>Высокий балл по математике и информатике.</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <i class="fa-solid fa-circle-check text-blue-400 mt-0.5 text-[10px]"></i>
+              <span>Академическая среда с ведущими исследователями и индустриальными партнерами.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="scroll-mt-24">
+      <div class="flex items-center space-x-3 mb-8">
+        <div class="w-2.5 h-8 bg-emerald-400 rounded-full"></div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Контакты</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Telegram Card -->
+        <div class="glass-card p-6 rounded-2xl text-center flex flex-col items-center justify-between">
+          <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center text-xl mb-3">
+            <i class="fa-brands fa-telegram"></i>
+          </div>
+          <div>
+            <h3 class="text-white font-bold mb-1">Telegram</h3>
+            <p class="text-slate-400 text-xs mb-1 font-mono text-cyan-400">@IVSONIX</p>
+            <p class="text-slate-500 text-xs mb-4">Быстрая связь и сообщения</p>
+          </div>
+          <a href="https://t.me/IVSONIX" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-xl bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/30 text-xs font-mono font-medium transition duration-200">
+            Открыть @IVSONIX
+          </a>
+        </div>
+
+        <!-- GitHub Card -->
+        <div class="glass-card p-6 rounded-2xl text-center flex flex-col items-center justify-between">
+          <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center text-xl mb-3">
+            <i class="fa-brands fa-github"></i>
+          </div>
+          <div>
+            <h3 class="text-white font-bold mb-1">GitHub</h3>
+            <p class="text-slate-400 text-xs mb-1 font-mono text-purple-300">fgugygyftdttftf</p>
+            <p class="text-slate-500 text-xs mb-4">Репозитории и код</p>
+          </div>
+          <a href="https://github.com/fgugygyftdttftf" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-xl bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white border border-purple-500/30 text-xs font-mono font-medium transition duration-200">
+            github.com/fgugygyftdttftf
+          </a>
+        </div>
+
+        <!-- Email Card with Copy Feature -->
+        <div class="glass-card p-6 rounded-2xl text-center flex flex-col items-center justify-between">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-xl mb-3">
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+          <div>
+            <h3 class="text-white font-bold mb-1">Электронная почта</h3>
+            <p class="text-slate-400 text-xs mb-1 font-mono text-emerald-300">iasalimov@edu.hse.ru</p>
+            <p class="text-slate-500 text-xs mb-4">Учебная почта НИУ ВШЭ</p>
+          </div>
+          <div class="w-full space-y-2">
+            <a href="mailto:iasalimov@edu.hse.ru" class="w-full py-2 rounded-xl bg-emerald-600/20 hover:bg-emerald-600 text-emerald-300 hover:text-white border border-emerald-500/30 text-xs font-mono font-medium transition duration-200 block text-center">
+              Написать письмо
+            </a>
+            <button onclick="copyToClipboard('iasalimov@edu.hse.ru', 'Почта ВШЭ скопирована!')" class="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 text-xs font-mono font-medium transition duration-200 flex items-center justify-center space-x-2">
+              <i class="fa-regular fa-copy"></i>
+              <span>Скопировать адрес</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/5 bg-brand-dark/90 py-8 relative z-10 text-center text-xs text-slate-500 font-mono">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        © 2026 Иван Салимов. Все права защищены.
+      </div>
+      <div class="flex items-center space-x-4 text-slate-400">
+        <span>НИУ ВШЭ Санкт-Петербург • ПАДиИИ</span>
+        <span>•</span>
+        <a href="https://fgugygyftdttftf.github.io/" class="hover:text-cyan-400 transition-colors">fgugygyftdttftf.github.io</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Scripts -->
+  <script>
+    // Copy to clipboard helper using execCommand fallback for strict iframe compliance
+    function copyToClipboard(text, customMessage) {
+      try {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast(customMessage || 'Скопировано в буфер обмена!');
+      } catch (err) {
+        console.error('Ошибка копирования:', err);
+        showToast('Не удалось скопировать :(');
+      }
+    }
+
+    // Toast alert presentation logic
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const msgElem = document.getElementById('toast-message');
+      msgElem.textContent = message;
+      
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
